@@ -32,10 +32,13 @@ PF方法直接推进界面方程即可，无需界面重新初始化或者界面
 界面推进步骤：
 - 使用简单迎风格式来得到对流项在网格每条边上的通量，从而得到对流项![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%875.png?raw=true)
 - 使用中心差分格式来得到体积分数的二阶偏导![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%876.png?raw=true)
-- 计算出每个网格上的化学势  
+- 计算出每个网格上的化学势
+
 > ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%877.png?raw=true)
+
 - 使用中心差分格式来得到化学势的二阶偏导![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%878.png?raw=true)
-- 显示推进：  
+- 显示推进:
+
 > ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%879.png?raw=true)
 
 ##四、数值计算步骤
