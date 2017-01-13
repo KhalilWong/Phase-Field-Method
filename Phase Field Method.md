@@ -50,15 +50,15 @@ PF方法直接推进界面方程即可，无需界面重新初始化或者界面
 ##五、计算结果与分析
 ###5.1 网格收敛性验证
 分别选取了50X50,100X100,200X200三种网格尺度进行初始化过程，分别如图所示：
-- 50X50
+- **50X50**
 
 ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8710.png?raw=true)
 
-- 100X100
+- **100X100**
 
 ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8711.png?raw=true)
 
-- 200X200
+- **200X200**
 
 ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8712.png?raw=true)
 
@@ -75,19 +75,19 @@ PF方法直接推进界面方程即可，无需界面重新初始化或者界面
 
 > ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8719.png?raw=true)
 
-t=1T时：
+**t=1T时：**
 
 ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8714.png?raw=true)
 
-t=2T时：
+**t=2T时：**
 
 ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8715.png?raw=true)
 
-t=3T时：
+**t=3T时：**
 
 ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8716.png?raw=true)
 
-t=0、1、2、3T对比图：
+**t=0、1、2、3T对比图：**
 
 ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8717.png?raw=true)
 
