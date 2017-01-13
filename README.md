@@ -16,3 +16,4 @@ Zalesak 圆盘旋转问题是一个二维验证算例，初始设置如下图所
 
 ## 二、初始化
 以平衡态下体积分数的分布来初始化相场，圆形或者直线的平衡态容易由公式得出，其中ε是表征界面厚度的量。将初始计算区域根据界面特性划分为9个区域，分别进行初始化，如图所示：
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/%E5%9B%BE%E7%89%872.png?raw=true)
