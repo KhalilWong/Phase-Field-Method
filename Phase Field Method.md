@@ -72,4 +72,5 @@ PF方法直接推进界面方程即可，无需界面重新初始化或者界面
 采用网格200X200，以C=0.5作为界面位置，局限于计算量设置
 
 > ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8718.png?raw=true)
+
 > ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8719.png?raw=true)
