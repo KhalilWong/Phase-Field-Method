@@ -50,3 +50,5 @@ PF方法直接推进界面方程即可，无需界面重新初始化或者界面
 ##五、计算结果与分析
 ###5.1 网格收敛性验证
 分别选取了50X50,100X100,200X200三种网格尺度进行初始化过程，分别如图所示：
+- 50X50
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8710.png?raw=true)
