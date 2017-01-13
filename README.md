@@ -7,7 +7,8 @@ Zalesak 圆盘旋转问题是一个二维验证算例，初始设置如下图所
 
 ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/%E5%9B%BE%E7%89%871.png?raw=true)
 
-图中红色线代表界面位置，其中相关参数如下：
+  
+  图中红色线代表界面位置，其中相关参数如下：
 - 计算域：1 X 1
 - 圆心： O（0.5，0.5）
 - 半径： R=0.4
