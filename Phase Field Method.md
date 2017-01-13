@@ -56,3 +56,14 @@ PF方法直接推进界面方程即可，无需界面重新初始化或者界面
 
 - 100X100
 
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8711.png?raw=true)
+
+- 200X200
+
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8712.png?raw=true)
+
+**三种网格比较图：**
+
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8713.png?raw=true)
+
+由图可以看出，在200X200时，网格就可以认为已经收敛。
