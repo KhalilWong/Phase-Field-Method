@@ -74,3 +74,22 @@ PF方法直接推进界面方程即可，无需界面重新初始化或者界面
 > ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8718.png?raw=true)
 
 > ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8719.png?raw=true)
+
+t=1T时：
+
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8714.png?raw=true)
+
+t=2T时：
+
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8715.png?raw=true)
+
+t=3T时：
+
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8716.png?raw=true)
+
+t=0、1、2、3T对比图：
+
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8717.png?raw=true)
+
+###5.3 简要分析
+由结果可以看出，随着时间的推进，界面的局部尖角特征逐渐趋于圆滑，直线部分也存在一定的变形；且整体的体积也有一定程度的耗散。部分原因应该是离散方法有误，导致界面变形，有待改进。
