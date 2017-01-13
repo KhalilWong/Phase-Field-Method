@@ -21,3 +21,8 @@ Zalesak 圆盘旋转问题是一个二维验证算例，初始设置如下图所
 
 得出，其中ε是表征界面厚度的量。将初始计算区域根据界面特性划分为9个区域，分别进行初始化，如图所示：
 
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%873.png?raw=true)
+
+预期结果：
+
+![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%874.png?raw=true)
