@@ -67,3 +67,9 @@ PF方法直接推进界面方程即可，无需界面重新初始化或者界面
 ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8713.png?raw=true)
 
 由图可以看出，在200X200时，网格就可以认为已经收敛。
+
+###5.2 随时间变化的计算结果
+采用网格200X200，以C=0.5作为界面位置，局限于计算量设置
+
+> ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8718.png?raw=true)
+> ![](https://github.com/KhalilWong/Phase-Field-Method/blob/master/Pic/%E5%9B%BE%E7%89%8719.png?raw=true)
