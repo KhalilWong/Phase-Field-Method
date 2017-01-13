@@ -93,3 +93,194 @@ PF方法直接推进界面方程即可，无需界面重新初始化或者界面
 
 ###5.3 简要分析
 由结果可以看出，随着时间的推进，界面的局部尖角特征逐渐趋于圆滑，直线部分也存在一定的变形；且整体的体积也有一定程度的耗散。部分原因应该是离散方法有误，导致界面变形，有待改进。
+
+##代码
+'
+PROGRAM phase_field
+implicit none
+real :: pi,e,et,yl,t
+integer ::n,i,j,m
+character (len=25)::fname
+real,dimension (200):: x
+real,dimension (200):: y
+real,dimension (200,200):: C
+real,dimension (0:201,0:201):: CC
+real,dimension (0:201,0:201):: U
+real,dimension (0:201,0:201):: V
+real,dimension (200,200):: UdC
+real,dimension (200,200):: VdC
+real,dimension (200,200):: FAI
+real,dimension (0:201,0:201):: FFAI
+real,dimension (200,200):: d2F
+
+n=200
+pi=3.14159265
+e=1.0/n
+et=e**2
+yl=0.5-sqrt(0.4**2-0.1**2)
+
+DO i=1,n
+
+x(i)=(i-0.5)/n
+y(i)=(i-0.5)/n
+U(0:n+1,i)=-2*pi*((i-0.5)/n-0.5)
+V(i,0:n+1)=2*pi*((i-0.5)/n-0.5)
+
+END DO
+
+C=0                                        !初始化C场
+
+DO i=1,n
+DO j=1,n
+    
+IF((y(j)<=0.7.AND.y(j)>=yl.AND.x(i)<=0.4).OR.(y(j)<=0.7.AND.y(j)>=yl.AND.x(i)>=0.6))THEN
+C(i,j)=0.5+0.5*tanh(min(0.4-sqrt((x(i)-0.5)**2+(y(j)-0.5)**2),max(0.4-x(i),x(i)-0.6))/(2*1.414*e))
+END IF
+
+IF(x(i)<=0.6.AND.x(i)>=0.4.AND.y(j)>=0.7)THEN
+C(i,j)=0.5+0.5*tanh(min(0.4-sqrt((x(i)-0.5)**2+(y(j)-0.5)**2),y(j)-0.7)/(2*1.414*e))
+END IF
+
+IF(x(i)<=0.6.AND.x(i)>=0.4.AND.y(j)<=0.7.AND.y(j)>=yl)THEN
+C(i,j)=0.5+0.5*tanh(max(max(0.4-x(i),x(i)-0.6),y(j)-0.7)/(2*1.414*e))
+END IF
+
+IF((x(i)<=0.4.AND.y(j)>=0.7).OR.(x(i)>=0.6.AND.y(j)>=0.7))THEN
+C(i,j)=0.5+0.5*tanh(min(0.4-sqrt((x(i)-0.5)**2+(y(j)-0.5)**2),min(sqrt((x(i)-0.4)**2+(y(j)-0.7)**2),sqrt((x(i)-0.6)**2+(y(j)-0.7)**2)))/(2*1.414*e))
+END IF
+
+IF(y(j)<=yl.AND.abs(0.5-x(i))>=0.1*(0.5-y(j))/sqrt(0.4**2-0.1**2))THEN
+C(i,j)=0.5+0.5*tanh((0.4-sqrt((x(i)-0.5)**2+(y(j)-0.5)**2))/(2*1.414*e))
+END IF
+
+IF(y(j)<=yl.AND.abs(0.5-x(i))<0.1*(0.5-y(j))/sqrt(0.4**2-0.1**2))THEN
+C(i,j)=0.5-0.5*tanh(min(sqrt((x(i)-0.4)**2+(y(j)-yl)**2),sqrt((x(i)-0.6)**2+(y(j)-yl)**2))/(2*1.414*e))
+END IF
+
+END DO
+END DO
+
+
+t=0                                                  !界面推进
+m=0
+DO WHILE(t<3)
+
+CC=0                                                 !C场分别向外增加一格
+DO i=0,n+1
+DO j=0,n+1
+
+IF(i>0.AND.i<n+1.AND.j>0.AND.j<n+1)THEN
+CC(i,j)=C(i,j)
+END IF
+
+IF(i==0.AND.j>0.AND.j<n+1)THEN
+CC(i,j)=2*C(i+1,j)-C(i+2,j)
+END IF
+
+IF(i==n+1.AND.j>0.AND.j<n+1)THEN
+CC(i,j)=2*C(i-1,j)-C(i-2,j)
+END IF
+
+IF(j==0.AND.i>0.AND.i<n+1)THEN
+CC(i,j)=2*C(i,j+1)-C(i,j+2)
+END IF
+
+IF(j==n+1.AND.i>0.AND.i<n+1)THEN
+CC(i,j)=2*C(i,j-1)-C(i,j-2)
+END IF
+
+END DO
+END DO
+
+
+DO i=1,n
+DO j=1,n
+
+IF(U(i,j)>0)THEN                                  !迎风格式求对流项
+UdC(i,j)=(U(i,j)*CC(i,j)-U(i-1,j)*CC(i-1,j))/e
+ELSE
+UdC(i,j)=(U(i+1,j)*CC(i+1,j)-U(i,j)*CC(i,j))/e
+END IF
+
+IF(V(i,j)>0)THEN
+VdC(i,j)=(V(i,j)*CC(i,j)-V(i,j-1)*CC(i,j-1))/e
+ELSE
+VdC(i,j)=(V(i,j+1)*CC(i,j+1)-V(i,j)*CC(i,j))/e
+END IF
+                                                   !势函数
+FAI(i,j)=CC(i,j)**3-1.5*CC(i,j)**2+0.5*CC(i,j)-e**2*((CC(i+1,j)+CC(i-1,j)-2*CC(i,j))+(CC(i,j+1)+CC(i,j-1)-2*CC(i,j)))/e**2
+
+END DO
+END DO
+
+
+FFAI=0                                              !势函数分别向外增加一格
+DO i=0,n+1
+DO j=0,n+1
+
+IF(i>0.AND.i<n+1.AND.j>0.AND.j<n+1)THEN
+FFAI(i,j)=FAI(i,j)
+END IF
+
+IF(i==0.AND.j>0.AND.j<n+1)THEN
+FFAI(i,j)=2*FAI(i+1,j)-FAI(i+2,j)
+END IF
+
+IF(i==n+1.AND.j>0.AND.j<n+1)THEN
+FFAI(i,j)=2*FAI(i-1,j)-FAI(i-2,j)
+END IF
+
+IF(j==0.AND.i>0.AND.i<n+1)THEN
+FFAI(i,j)=2*FAI(i,j+1)-FAI(i,j+2)
+END IF
+
+IF(j==n+1.AND.i>0.AND.i<n+1)THEN
+FFAI(i,j)=2*FAI(i,j-1)-FAI(i,j-2)
+END IF
+
+END DO
+END DO
+
+
+DO i=1,n
+DO j=1,n
+                                               !势函数2阶偏导
+d2F(i,j)=((FFAI(i+1,j)+FFAI(i-1,j)-2*FFAI(i,j))+(FFAI(i,j+1)+FFAI(i,j-1)-2*FFAI(i,j)))/e**2
+
+END DO
+END DO
+
+DO i=1,n
+DO j=1,n
+                                               !C场推进
+C(i,j)=C(i,j)-et*(UdC(i,j)+VdC(i,j))+et*e*d2F(i,j)
+C(i,j)=min(1.,max(0.,C(i,j)))
+
+END DO
+END DO
+
+m=m+1
+t=m*et
+write(*,*)t
+
+IF(mod(m,n**2)==0)THEN
+write(fname,*)'output_C',m/n**2,'.txt'
+open(17,file=Trim(fname))
+do j=1,n
+write(17,270)(C(:,j))
+270 FORMAT (200F10.5)
+end do
+close(17)
+END IF
+
+END DO
+
+!open(19,file="output_C.txt")
+!do j=1,n
+!write(19,290)(C(:,j))
+!290 FORMAT (200F10.5)
+!end do
+!close(19)
+
+stop
+END PROGRAM'
